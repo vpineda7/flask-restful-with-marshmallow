@@ -13,3 +13,4 @@ flask-restful provide a easy way to build restful api for us
 
 #### filtering output
 `Schema(only=("name","age"))`, when we pass `only` args, we can specify which filed we want to output
+> you can also use `exclude` to exclude fileds
