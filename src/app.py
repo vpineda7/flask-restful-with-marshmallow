@@ -1,9 +1,23 @@
+import datetime
+
 from flask import Flask, request
 from flask_restful import Api, Resource
 from marshmallow import Schema, fields
 
 app = Flask(__name__)
 api = Api(app)
+
+class ResObj(object):
+    def __init__(self, name, phone=None, email=None, data=None):
+        self.name = name
+        self.phone = phone
+        self.email = email
+        self.data = data
+        self.created_at = datetime.datetime.now()
+
+    def __repr__(self):
+        return '<User(name={self.name!r})>'.format(self=self)
+
 
 class ResSchema(Schema):
     name = fields.Str(
@@ -19,19 +33,17 @@ class ResSchema(Schema):
 class Res(Resource):
     def __init__(self):
         super(Res, self).__init__()
-        self.res = {
-            "name": "Bob",
-            "phone": "93578746",
-            "email": "bobtest@email.com",
-            "create_at": "2014-08-17T14:54:16.049594+00:00",
-            "data": {
+        self.res = ResObj(
+            "Bob",
+            phone="93578746",
+            email="bobtest@email.com",
+            data={
                 "school": "some school",
                 "class": "some class"
                 }
-            }
+        )
 
     def get(self):
-        print (self.res)
         schema = ResSchema()
         result = schema.dump(self.res)
         return result
