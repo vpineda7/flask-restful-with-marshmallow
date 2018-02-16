@@ -38,6 +38,12 @@ class SomeSchema(Schema):
         ordered = True
 ```
 
+#### Pre-processing and Post-processing Methods
+- `pre_load`
+- `post_load`
+- `pre_dump`
+- `post_dump`
+
 ### HOW TO TEST
 ``` bash
 # GET
